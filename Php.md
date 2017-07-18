@@ -1,17 +1,17 @@
-###PHP编码规范
+### PHP编码规范
 
-###文件字符编码
+### 文件字符编码
 统一使用`UTF-8`,无BOM头，禁止使用`GBK,ASCII,ISO8859`等字符编码
 
 
-####文件名命名
+#### 文件名命名
 
-####标记
+#### 标记
 文件第一行使用`<?php`开始，
 
 文件结束时不使用 `?>`
 
-####文件版权
+#### 文件版权
 ```php
 <?php
 
@@ -27,7 +27,7 @@
  *********************************************************************/
 ```
 
-####命名空间
+#### 命名空间
 基于命名空间需要符合PSR-4
 
 `capsheaf/src/Fundation/Container/ClassName.php`
@@ -42,8 +42,8 @@ use TSoftware\Container\ObjectProphecy;
 //此处距离下方代码空出一行
 ```
 
-###命名规范
-####变量
+### 命名规范
+#### 变量
 使用匈牙利+驼峰法定义，不能使用下划线分割的变量，`mixed`类型变量直接使用驼峰法
 ```php
 $sUserName = 'Cindy';
@@ -56,7 +56,7 @@ function funcReturnMixedVal(){
 }
 
 ```
-####类
+#### 类
 类名使用大写字符开头的驼峰法表示，中括号放在类名定义的下一行
 ```php
 class ClassName 
@@ -65,8 +65,8 @@ class ClassName
 }
 ```
 
-####常量
-#####全局常量
+#### 常量
+##### 全局常量
 define的常量名使用下划线分割的大写字母表示，禁止使用小写字母
 
 一般全局常量
@@ -78,7 +78,7 @@ define('ROOT_ABS_PATH', __DIR__);
 namespace TSoftware
 define('SCOPED_ROOT_ABS_PATH', __DIR__);
 ```
-#####类常量
+##### 类常量
 ```php
 class ClassName
 {
@@ -87,9 +87,9 @@ class ClassName
 ```
 
 
-###注释
+### 注释
 
-####普通注释
+#### 普通注释
 
 ```php
 //单行注释
@@ -101,7 +101,7 @@ class ClassName
  
 ```
 
-####函数注释
+#### 函数注释
 
 ```php
 /**
@@ -119,9 +119,9 @@ public function AddUser($userName, $age, $tel = '10086')
 ```
 
 
-###语言结构
+### 语言结构
 
-####if
+#### if
 
 ```php
 if ((condition1) || (condition2)) {
@@ -163,7 +163,7 @@ if ($needSendMail || $needSendSms) {
 }
 ```
 
-####switch
+#### switch
 
 switch的条件分支应该整体缩进，条件分支最后空出一行（最后一个条件分支除外）
 ```php
@@ -182,7 +182,7 @@ switch (condition) {
 }
 ```
 
-####三元运算符
+#### 三元运算符
 
 三元运算符用于变量赋值时
 ```php
@@ -193,9 +193,9 @@ $b = $condition3 && $condition4
     ? 'foo_man_this_is_too_long_what_should_i_do'
     : 'bar';
 ```
-###缩进和行宽
+### 缩进和行宽
 
-####缩进
+#### 缩进
 使用四个空格，禁止使用`tab`或者其它宽度的缩进
 
 ```php
@@ -208,7 +208,7 @@ function indenting(){
 
 ```
 
-####行宽
+#### 行宽
 为了增加可读性，行宽原则上为75-80个字符左右，超出应考虑换行
 
 ```php
@@ -221,23 +221,23 @@ if ($condA < 10 || $condB < 10 || $condC < 10 || $condD || $condE < 10
 $longString = 'You are strongly encouraged to always use curly braces even in situations where they are technically optional. Having them increases readability and decreases the likelihood of logic errors being introduced when new lines are added. ';
 ```
 
-###字符串
-####字符串定义
+### 字符串
+#### 字符串定义
 常规字符串使用单引号包含, 只有在字符串中出现单引号的情况下才使用双引号
 ```php
 $str = 'I am a string.';
 
 $str = "Don't use double qoute if not necessary";
 ```
-####字符串拼接
+#### 字符串拼接
 拼接字符串时不能在双引号包含的字符串中嵌入变量，使用单独的`.`号连接。
 ```php
 $content = 'Contents';
 $str = 'Prefix '.$content.' Surfix';
 ```
 
-###函数
-####函数调用
+### 函数
+#### 函数调用
 函数调用时函数名称和起始括号间不能有空格:
 ```php
 $var = foo($bar, $baz, $quux);
