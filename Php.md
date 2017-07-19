@@ -5,11 +5,15 @@
 
 
 #### 文件名命名
-
+* 全部文件名使用`UpperCamelCase.php`命名。
+* 文件名与文件中的类需要对应，如`ClassName`类，文件名则为`ClassName.php`。
+* 每个对应文件名的文件仅能在其中定义一个类或者一个接口，严禁在同一个文件中定义多个。
+* 单元测试代码必须与被测的类名相对应，如`ClassNameTest.php`。
+* 新的项目代码必须遵循PSR-4规范，
 #### 标记
-文件第一行使用`<?php`开始，
+在PHP文件第一行使用`<?php`开始标记，
 
-文件结束时不使用 `?>`。
+任何纯PHP代码文件结束时不应使用 `?>`结束标记。
 
 #### 文件版权
 ```php
@@ -33,7 +37,7 @@ Version主版本为重大更新时递增，次版本为较大修改时递增，�
 
 
 #### 命名空间
-基于命名空间需要符合PSR-4
+
 
 `capsheaf/src/Fundation/Container/ClassName.php`
 
@@ -49,7 +53,17 @@ use TSoftware\Container\ObjectProphecy;
 
 ### 命名规范
 #### 变量
-使用基本类型限定+驼峰法定义，不能使用下划线分割的变量，`mixed`类型变量直接使用驼峰法:
+使用基本类型限定+驼峰法`UpperCamelCase`定义，不能使用下划线分割的变量，`mixed`类型变量直接使用驼峰法:
+
+基本限定前缀规则:
+* `s`表示字符串，如`sUserName`。
+* `n`表示数字，包括integer, float/double，如`nCount，nSize，nOffset，nWeight`。
+* `h`表示句柄，包括文件句柄，mysql等资源句柄，如`hFile，hMysql`。
+* `arr`表示数组，如`arrUsersList`。
+* `className`表示类实例化的对象，如`userInfoObj，fooBarInstance`。
+* 要发生动态类型转换的变量不加前缀，使用`lowerCamelCase`，但是应该避免过多转换性赋值操作。
+
+
 ```php
 $sUserName = 'Cindy';//字符串
 $hFile = fopen('file.dat');//句柄
@@ -61,6 +75,22 @@ function funcReturnMixedVal(){
 }
 
 ```
+
+变量的命名应该能够基本自解释，不能为了精简导致不能识别变量的含义，为了它的意义跟清晰可以长一点。
+
+正确的例子:
+```php
+$singletonObjectsRegistry
+$arrArgumentsLists
+$sALotOfHtmlCode
+```
+错误的例子:
+```php
+$objRgstry
+$argArr
+$cx
+```
+> 例外是`for，while`循环中使用的`$i，$j，$k`变量。
 
 #### 全局变量
 ```php
@@ -158,6 +188,10 @@ $sPositionRight;//右方单行注释
  */
 $sPositionAboveMulti; 
 ```
+
+#### 类注释
+
+
 #### 类成员变量和常量注释:
 ```php
 class ClassName
@@ -172,7 +206,7 @@ class ClassName
      * 成员变量的注释
      * @var int
      */
-    protected $numTestedMethods = null;
+    protected $m_nTestedMethods = null;
 }
 ```
 
@@ -181,12 +215,12 @@ class ClassName
 ```php
 /**
  * 添加一个用户
- * @param string $userName 用户名
- * @param int $age 用户年龄
- * @param string $age 电话
- * @return string|boolean|class
+ * @param string $sUserName 用户名
+ * @param int $nAge 用户年龄
+ * @param string $sTel 电话
+ * @return string|integer|float|boolean|class|resource 阐明返回的类型，若为API方法，需要在下方标记上返回的样本数据
  */
-public function AddUser($userName, $age, $tel = '10086')
+public function AddUser($sUserName, $nAge, $sTel = '10086')
 {
     return $ret;
 }
@@ -197,6 +231,7 @@ public function AddUser($userName, $age, $tel = '10086')
 ### 语言结构
 
 #### if
+`if`与整个判断条件之前的括号空一个空格，子判断条件与前后的逻辑操作符之间空一个空格，整个判断条件末尾的括号与中括号之间有一个空格。
 
 ```php
 if ((condition1) || (condition2)) {
@@ -231,16 +266,17 @@ if (   $condition1
 
 应将复杂的if条件集合移动到if之前进行处理
 ```php
-$needSendMail = ($condition1 || $condition2);
-$needSendSms = ($condition3 && $condtion4);
-if ($needSendMail || $needSendSms) {
+$bNeedSendMail = ($condition1 || $condition2);
+$bNeedSendSms = ($condition3 && $condtion4);
+if ($bNeedSendMail || $bNeedSendSms) {
     //code here
 }
 ```
 
 #### switch
 
-switch的条件分支应该整体缩进，条件分支最后空出一行（最后一个条件分支除外）
+* switch的条件分支应该整体缩进，每个条件分支最后空出一行（最后一个条件分支除外）
+* 起始中括号与`switch`在同一行
 ```php
 switch (condition) {
     case 1:
@@ -267,6 +303,10 @@ $a = $condition1 && $condition2
 $b = $condition3 && $condition4
     ? 'foo_man_this_is_too_long_what_should_i_do'
     : 'bar';
+
+//遇到简单的字符串拼接操作时，可以放到同一行
+$c = ($bOk ? 'Succees' : 'Failed').' Upload files';
+
 ```
 ### 缩进和行宽
 
@@ -284,31 +324,43 @@ function indenting(){
 ```
 
 #### 行宽
-为了增加可读性，行宽原则上为75-80个字符左右，超出应考虑换行
+为了增加可读性，行宽原则上为90-120个字符左右，超出应考虑换行
 
 ```php
-if ($condA < 10 || $condB < 10 || $condC < 10 || $condD || $condE < 10 
-    || $condF < 10 || $condG < 10 || $condH < 10)
+if ($condA < 10 || $condB < 10 || $condC < 10 || $condD || $condE < 10 || $condF < 10 || $condG < 10 || $condH < 10
+    || $condI < 10 || $condJ < 10
+) {
+    //code here
+}
+
 ```
 
 但最后出现的为字符串除外
 ```php
-$longString = 'You are strongly encouraged to always use curly braces even in situations where they are technically optional. Having them increases readability and decreases the likelihood of logic errors being introduced when new lines are added. ';
+$sLongString = 'You are strongly encouraged to always use curly braces even in situations where they are technically optional. Having them increases readability and decreases the likelihood of logic errors being introduced when new lines are added. ';
 ```
 
 ### 字符串
 #### 字符串定义
 常规字符串使用单引号包含, 只有在字符串中出现单引号的情况下才使用双引号
 ```php
-$str = 'I am a string.';
+$sStr = 'I am a string.';
 
-$str = "Don't use double qoute if not necessary";
+$sStr = "Don't use double qoute if not necessary";
 ```
 #### 字符串拼接
-拼接字符串时不能在双引号包含的字符串中嵌入变量，使用单独的`.`号连接，禁止使用双引号中嵌入`$`变量来拼接字符串。
+拼接字符串时不能在双引号包含的字符串中嵌入变量，使用单独的`.`号连接，禁止使用双引号中嵌入`$`变量来拼接字符串，`.`号之间不空格。
 ```php
-$content = 'Contents';
-$str = 'Prefix '.$content.' Surfix';
+$sContent = 'Contents';
+$sStr = 'Prefix '.$sContent.' Surfix';
+```
+多行长的字符串拼接应该换行，每行中出现的变量应保持形式上的正确性:
+```php
+    $sParams  = 'action=login&token=MY_TOKEN'
+    $sPostMsg = 'GET /index.php?'.$sParams
+               .'Host: www.yantao.info'
+               .'Cookies: PHPSID='.$sSidStored.'; HMAC=ccddd'
+               .'User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:54.0) Gecko/20100101 Firefox/54.0';
 ```
 
 ### 函数
@@ -334,9 +386,19 @@ $this->callSomeFunction('param1',     'second',        true);
 $this->callSomeFunction('parameter2', 'third',         false);
 $this->callSomeFunction('3',          'verrrrrrylong', true);
 ```
-#### 函数定义
+#### 函数/方法定义
 
-函数定义时不能超过80行，40行为佳，超出80行考虑按功能点进行拆分，将子功能点放置到子函数中实现。
+* 函数定义时不能超过80行，40行为佳，超出80行考虑按功能点进行拆分，将子功能点放置到子函数中实现。
+* 函数名使用`lowerCamelCase`驼峰法
+* 函数方法名称具有描述性，但同时应保持简洁。构造函数必须使用`__construct()`，禁止使用类名作为构造函数。 
+```php
+    public function __construct()
+    public function myMethod()
+    public someNiceMethodName()
+    function betterWriteLongMethodNamesThanNamesNobodyUnderstands()
+    function singYmcaLoudly()
+```
+
 
 ### 数组
 #### 数组定义
