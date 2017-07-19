@@ -132,7 +132,8 @@ class ClassName
 
 #### 类成员变量
 
-类成员变量，统一使用`$m_`前缀，置于常量定义之后，排序为`private，protected，public`，必要时进行对齐，成员变量初始化为null值时使用小写`null`，不能使用`NULL`。
+* 类成员变量，统一使用`$m_`前缀，置于常量定义之后，排序为`private，protected，public`，必要时进行对齐，成员变量初始化为null值时使用小写`null`，不能使用`NULL`。
+* 禁止使用`var`定义变量。
 ```php
 class ClassName
 {
@@ -241,7 +242,7 @@ public function AddUser($sUserName, $nAge, $sTel = '10086')
 #### if
 * `if`与整个判断条件之前的括号空一个空格，子判断条件与前后的逻辑操作符之间空一个空格，整个判断条件末尾的括号与中括号之间有一个空格。
 * 严禁因为简短不使用中括号包含各个条件的执行语句。
-
+* `elseif`连贯书写，禁止使用`else if`。
 ```php
 if ((condition1) || (condition2)) {
     action1;
@@ -438,6 +439,12 @@ $this->callSomeFunction('3',          'verrrrrrylong', true);
 
 ### 数组
 #### 数组定义
+* 数组存在单个键值对，或者少量没有指定键名的子元素集合则可以在同一行书写。
+```php
+$arrOneKV = array('id' => 10086);
+$arrFewVs = array('Gina', 'Tom', 'Cindy', 'Peter');
+```
+* 数组存在多个键值对形式的子元素，或者子元素较长时分行书写。
 ```php
 $arrInstanceList = array(
     'foo'  => 'bar',
