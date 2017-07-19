@@ -68,13 +68,38 @@ g_arrInstances = array();
 g_nCount = 1024;
 ```
 #### 类
-类名使用大写字符开头的驼峰法表示，中括号放在类名定义的下一行
+* 类名使用大写字符开头的驼峰法`UpperCamelCase`表示，中括号放在类名定义的下一行。
+* 类名必须为名词，不能为形容词，动词等。
+* 不能直接实例化的抽象类必须以`Abstract`开头。
+* 类命名必须符合实际含义，去掉命名空间后，还能准确表达类名的字面含义。
+
 ```php
 class ClassName 
 {
 
 }
 ```
+
+不好的例子:
+
+|完全限定名|类名|备注 |
+|----------|:---:|---:|
+|\TSoftware\Flow\Session\Php        |Php        |The class is not a representation of PHP|
+|\TSoftware\Cache\Backend\File 	    |File 	    |The class doesn’t represent a file!|
+|\TSoftware\Flow\Session\Interface 	|Interface 	|Not allowed, “Interface” is a reserved keyword|
+|\TSoftware\Foo\Controller\Default 	|Default 	|Not allowed, “Default” is a reserved keyword|
+|\TSoftware\Flow\Objects\Manager 	|Manager 	|Just “Manager” is too fuzzy|
+
+好的例子:
+
+|完全限定名|类名|备注 |
+|----------|:---:|---:|
+|\TSoftware\Flow\Session\PhpSession 	        |PhpSession 	    |That’s a PHP Session
+|\TSoftware\Flow\Cache\Backend\FileBackend 	    |FileBackend 	    |A File Backend
+|\TSoftware\Flow\Session\SessionInterface 	    |SessionInterface 	|Interface for a session
+|\TSoftware\Foo\Controller\StandardController   |StandardController |The standard controller
+|\TSoftware\Flow\Objects\ObjectManager 	        |ObjectManager 	    |“ObjectManager” is clearer
+
 #### 类成员变量
 
 类成员变量，统一使用`$m_`前缀，置于常量定义之后，排序为`private，protected，public`，必要时进行对齐，成员变量初始化为null值时使用小写`null`，不能使用`NULL`。
@@ -117,14 +142,21 @@ class ClassName
 
 #### 普通注释
 
+普通单行注释位于注释点上方或者右方
 ```php
-//单行注释
+//上方单行注释
+$sPositionAbove;
 
+$sPositionRight;//右方单行注释
+```
+
+普通多行注释位于注释点上方
+```php
 /* 
  * 多行注释
  * 多行注释
  */
- 
+$sPositionAboveMulti; 
 ```
 #### 类成员变量和常量注释:
 ```php
@@ -302,7 +334,9 @@ $this->callSomeFunction('param1',     'second',        true);
 $this->callSomeFunction('parameter2', 'third',         false);
 $this->callSomeFunction('3',          'verrrrrrylong', true);
 ```
+#### 函数定义
 
+函数定义时不能超过80行，40行为佳，超出80行考虑按功能点进行拆分，将子功能点放置到子函数中实现。
 
 ### 数组
 #### 数组定义
