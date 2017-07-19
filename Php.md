@@ -1,7 +1,7 @@
 ### PHP编码规范
 
 ### 文件字符编码
-统一使用`UTF-8`,无BOM头，禁止使用`GBK,ASCII,ISO8859`等字符编码
+统一使用`UTF-8`，无BOM头，禁止使用`GBK、GB2312、ASCII、ISO8859`等字符编码。
 
 
 #### 文件名命名
@@ -9,7 +9,7 @@
 #### 标记
 文件第一行使用`<?php`开始，
 
-文件结束时不使用 `?>`
+文件结束时不使用 `?>`。
 
 #### 文件版权
 ```php
@@ -26,6 +26,11 @@
  *      tsoftware<admin@yantao.info> 2017-07-18 Add user_name field
  *********************************************************************/
 ```
+Author为文件的创建者或者Version主版本作者。
+
+Version主版本为重大更新时递增，次版本为较大修改时递增，小版本为基本修改时递增，时间版本为此版本的修改时间。
+
+
 
 #### 命名空间
 基于命名空间需要符合PSR-4
@@ -44,17 +49,23 @@ use TSoftware\Container\ObjectProphecy;
 
 ### 命名规范
 #### 变量
-使用匈牙利+驼峰法定义，不能使用下划线分割的变量，`mixed`类型变量直接使用驼峰法
+使用基本类型限定+驼峰法定义，不能使用下划线分割的变量，`mixed`类型变量直接使用驼峰法:
 ```php
-$sUserName = 'Cindy';
-$hFile = fopen('file.dat');
-$nSize = 4096;
-$userInfoObj = new UserInfo();
+$sUserName = 'Cindy';//字符串
+$hFile = fopen('file.dat');//句柄
+$nSize = 4096;//数字变量
+$userInfoObj = new UserInfo();//对象
 
 function funcReturnMixedVal(){
-    return $returnVal;
+    return $returnVal;//可能为多种类型的变量
 }
 
+```
+
+#### 全局变量
+```php
+g_arrInstances = array();
+g_nCount = 1024;
 ```
 #### 类
 类名使用大写字符开头的驼峰法表示，中括号放在类名定义的下一行
@@ -64,10 +75,24 @@ class ClassName
 
 }
 ```
+#### 类成员变量
+
+类成员变量，统一使用`$m_`前缀，置于常量定义之后，排序为`private，protected，public`，必要时进行对齐，成员变量初始化为null值时使用小写`null`，不能使用`NULL`。
+```php
+class ClassName
+{
+    const       CONST_VAL   = 4096;//const常量放到顶部
+    private     $m_hMysql   = null;
+    protected   $m_sLink    = 'localhost:3306';
+    public      $m_hImpl    = null;
+}
+```
+
+
 
 #### 常量
 ##### 全局常量
-define的常量名使用下划线分割的大写字母表示，禁止使用小写字母
+define的常量名使用下划线分割的大写字母表示，禁止使用小写字母，禁止定义大小写不敏感的常量。
 
 一般全局常量
 ```php
@@ -79,13 +104,14 @@ namespace TSoftware
 define('SCOPED_ROOT_ABS_PATH', __DIR__);
 ```
 ##### 类常量
+类常量置于成员变量和成员函数声明之前，使用下划线分隔的大写字母表示:
 ```php
 class ClassName
 {
-    const constant = 'constant value';
+    const CONSTANT_VALUE    = 'constant value';
+    const BUFFER_SIZE       = 4096;
 }
 ```
-
 
 ### 注释
 
@@ -99,6 +125,23 @@ class ClassName
  * 多行注释
  */
  
+```
+#### 类成员变量和常量注释:
+```php
+class ClassName
+{
+    /**
+     * 常量的注释
+     * @var string
+     */
+    const CONSTANT_VALUE    = 'constant value';
+     
+    /**
+     * 成员变量的注释
+     * @var int
+     */
+    protected $numTestedMethods = null;
+}
 ```
 
 #### 函数注释
@@ -230,7 +273,7 @@ $str = 'I am a string.';
 $str = "Don't use double qoute if not necessary";
 ```
 #### 字符串拼接
-拼接字符串时不能在双引号包含的字符串中嵌入变量，使用单独的`.`号连接。
+拼接字符串时不能在双引号包含的字符串中嵌入变量，使用单独的`.`号连接，禁止使用双引号中嵌入`$`变量来拼接字符串。
 ```php
 $content = 'Contents';
 $str = 'Prefix '.$content.' Surfix';
@@ -260,6 +303,18 @@ $this->callSomeFunction('parameter2', 'third',         false);
 $this->callSomeFunction('3',          'verrrrrrylong', true);
 ```
 
+
+### 数组
+#### 数组定义
+```php
+$arrInstanceList = array(
+    'foo'  => 'bar',
+    'spam' => array(
+        'author' => 'tsoftware',
+        'name'   => 'Cindy',
+    ),
+);
+```
 Author: <http://www.yantao.info/>
 
 Copy Right (c) 2017 WWW.YANTAO.INFO
