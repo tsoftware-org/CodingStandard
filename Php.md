@@ -321,12 +321,12 @@ $c = ($bOk ? 'Succees' : 'Failed').' Upload files';
 #### foreach
 
 ```php
-    /** 
-     * @var $product \TSoftware\SomePackage\Domain\Model\Product 
-     */
-    foreach ($products as $key => $product) {
-        $product->getTitle();
-    }
+/** 
+ * @var $product \TSoftware\SomePackage\Domain\Model\Product 
+ */
+foreach ($products as $key => $product) {
+    $product->getTitle();
+}
 ```
 ### 缩进和行宽
 
