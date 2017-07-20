@@ -277,6 +277,7 @@ if ($bNeedSendMail || $bNeedSendSms) {
 
 * switch的条件分支应该整体缩进，每个条件分支最后空出一行（最后一个条件分支除外）
 * 起始中括号与`switch`在同一行
+* 若`case`子句完成后，需要继续执行下一个子句，需要明确注释提醒
 ```php
 switch (condition) {
     case 1:
@@ -285,8 +286,11 @@ switch (condition) {
     
     case 2:
         action2;
+        //若没有break，而继续执行则需要进行提示
+        
+    case 3:
+        action2;
         break;
-    
     default:
         defaultaction;
         break;
