@@ -1,6 +1,6 @@
-### PHP编码规范
+## PHP编码规范
 
-### 文件字符编码
+#### 文件字符编码
 统一使用`UTF-8`，无BOM头，禁止使用`GBK、GB2312、ASCII、ISO8859`等字符编码。
 
 
@@ -132,7 +132,8 @@ class ClassName
 
 #### 类成员变量
 
-类成员变量，统一使用`$m_`前缀，置于常量定义之后，排序为`private，protected，public`，必要时进行对齐，成员变量初始化为null值时使用小写`null`，不能使用`NULL`。
+* 类成员变量，统一使用`$m_`前缀，置于常量定义之后，排序为`private，protected，public`，必要时进行对齐，成员变量初始化为null值时使用小写`null`，不能使用`NULL`。
+* 禁止使用`var`定义变量。
 ```php
 class ClassName
 {
@@ -190,7 +191,15 @@ $sPositionAboveMulti;
 ```
 
 #### 类注释
+```php
+/**
+ * 类注释
+ */
+class ClassName
+{
 
+}
+```
 
 #### 类成员变量和常量注释:
 ```php
@@ -231,8 +240,9 @@ public function AddUser($sUserName, $nAge, $sTel = '10086')
 ### 语言结构
 
 #### if
-`if`与整个判断条件之前的括号空一个空格，子判断条件与前后的逻辑操作符之间空一个空格，整个判断条件末尾的括号与中括号之间有一个空格。
-
+* `if`与整个判断条件之前的括号空一个空格，子判断条件与前后的逻辑操作符之间空一个空格，整个判断条件末尾的括号与中括号之间有一个空格。
+* 严禁因为简短不使用中括号包含各个条件的执行语句。
+* `elseif`连贯书写，禁止使用`else if`。
 ```php
 if ((condition1) || (condition2)) {
     action1;
@@ -311,6 +321,17 @@ $b = $condition3 && $condition4
 //遇到简单的字符串拼接操作时，可以放到同一行
 $c = ($bOk ? 'Succees' : 'Failed').' Upload files';
 
+```
+
+#### foreach
+
+```php
+/** 
+ * @var $product \TSoftware\SomePackage\Domain\Model\Product 
+ */
+foreach ($products as $key => $product) {
+    $product->getTitle();
+}
 ```
 ### 缩进和行宽
 
@@ -393,12 +414,28 @@ $this->callSomeFunction('3',          'verrrrrrylong', true);
 #### 函数/方法定义
 
 * 函数定义时不能超过80行，40行为佳，超出80行考虑按功能点进行拆分，将子功能点放置到子函数中实现。
-* 函数名使用`lowerCamelCase`驼峰法
-* 函数方法名称具有描述性，但同时应保持简洁。构造函数必须使用`__construct()`，禁止使用类名作为构造函数。 
+* 函数名使用`lowerCamelCase`驼峰法。
+* 函数方法名称具有描述性，但同时应保持简洁。构造函数必须使用`__construct()`，禁止使用类名作为构造函数，且构造函数中不应该做不成功和抛出异常的事。 
+* 函数主体的起始中括号应换行重新占一行开始书写，两个连续的函数定义之间使用两个空行分隔。
+* 类成员函数必须带有访问修饰符`public，protected，private`，严禁使用默认值。
 ```php
-    public function __construct()
     public function myMethod()
-    public someNiceMethodName()
+    {
+    
+    }
+```
+* 类成员常量、变量和方法定义的顺序为`const，public，protected，private`。
+* 类构造函数置于公有函数定义集合的最前面，析构函数`__destruct()`置于公有函数定义集合的最后面。
+* 类私有函数的定义应置于类成员函数集合的末尾。
+```php
+    private function someNiceMethodName()
+    {
+    
+    }
+```
+
+* 虽然长但易于理解的函数名总比让人一头雾水的函数名强
+```php
     function betterWriteLongMethodNamesThanNamesNobodyUnderstands()
     function singYmcaLoudly()
 ```
@@ -406,6 +443,13 @@ $this->callSomeFunction('3',          'verrrrrrylong', true);
 
 ### 数组
 #### 数组定义
+* 一般情况下数组定义使用`array()`而不使用`[]`，在明确废弃对php5.4以下版本的兼容的情况下，请使用`[]`。
+* 数组存在单个键值对，或者少量没有指定键名的子元素集合则可以在同一行书写。
+```php
+$arrOneKV = array('id' => 10086);
+$arrFewVs = array('Gina', 'Tom', 'Cindy', 'Peter');
+```
+* 数组存在多个键值对形式的子元素，或者子元素较长时分行书写。
 ```php
 $arrInstanceList = array(
     'foo'  => 'bar',
