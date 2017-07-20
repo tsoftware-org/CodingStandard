@@ -1,21 +1,28 @@
 ## PHP编码规范
 
+
 #### 文件字符编码
+
 统一使用`UTF-8`，无BOM头，禁止使用`GBK、GB2312、ASCII、ISO8859`等字符编码。
 
 
 #### 文件名命名
+
 * 全部文件名使用`UpperCamelCase.php`命名。
 * 文件名与文件中的类需要对应，如`ClassName`类，文件名则为`ClassName.php`。
 * 每个对应文件名的文件仅能在其中定义一个类或者一个接口，严禁在同一个文件中定义多个。
 * 单元测试代码必须与被测的类名相对应，如`ClassNameTest.php`。
 * 新的项目代码必须遵循PSR-4规范，
+
+
 #### 标记
 在PHP文件第一行使用`<?php`开始标记，
 
 任何纯PHP代码文件结束时不应使用 `?>`结束标记。
 
+
 #### 文件版权
+
 ```php
 <?php
 
@@ -35,9 +42,7 @@ Author为文件的创建者或者Version主版本作者。
 Version主版本为重大更新时递增，次版本为较大修改时递增，小版本为基本修改时递增，时间版本为此版本的修改时间。
 
 
-
 #### 命名空间
-
 
 `capsheaf/src/Fundation/Container/ClassName.php`
 
@@ -51,8 +56,11 @@ use TSoftware\Container\ObjectProphecy;
 //此处距离下方代码空出一行
 ```
 
+
 ### 命名规范
+
 #### 变量
+
 使用基本类型限定+驼峰法`UpperCamelCase`定义，不能使用下划线分割的变量，`mixed`类型变量直接使用驼峰法:
 
 基本限定前缀规则:
@@ -62,7 +70,6 @@ use TSoftware\Container\ObjectProphecy;
 * `arr`表示数组，如`arrUsersList`。
 * `className`表示类实例化的对象，如`userInfoObj，fooBarInstance`。
 * 要发生动态类型转换的变量不加前缀，使用`lowerCamelCase`，但是应该避免过多转换性赋值操作。
-
 
 ```php
 $sUserName = 'Cindy';//字符串
@@ -92,12 +99,17 @@ $cx
 ```
 > 例外是`for，while`循环中使用的`$i，$j，$k`变量。
 
+
 #### 全局变量
+
 ```php
 g_arrInstances = array();
 g_nCount = 1024;
 ```
+
+
 #### 类
+
 * 类名使用大写字符开头的驼峰法`UpperCamelCase`表示，中括号放在类名定义的下一行。
 * 类名必须为名词，不能为形容词，动词等。
 * 不能直接实例化的抽象类必须以`Abstract`开头。
@@ -130,6 +142,7 @@ class ClassName
 |\TSoftware\Foo\Controller\StandardController   |StandardController |The standard controller
 |\TSoftware\Flow\Objects\ObjectManager 	        |ObjectManager 	    |“ObjectManager” is clearer
 
+
 #### 类成员变量
 
 * 类成员变量，统一使用`$m_`前缀，置于常量定义之后，排序为`private，protected，public`，必要时进行对齐，成员变量初始化为null值时使用小写`null`，不能使用`NULL`。
@@ -145,9 +158,10 @@ class ClassName
 ```
 
 
-
 #### 常量
+
 ##### 全局常量
+
 define的常量名使用下划线分割的大写字母表示，禁止使用小写字母，禁止定义大小写不敏感的常量。
 
 一般全局常量
@@ -159,7 +173,10 @@ define('ROOT_ABS_PATH', __DIR__);
 namespace TSoftware
 define('SCOPED_ROOT_ABS_PATH', __DIR__);
 ```
+
+
 ##### 类常量
+
 类常量置于成员变量和成员函数声明之前，使用下划线分隔的大写字母表示:
 ```php
 class ClassName
@@ -168,6 +185,7 @@ class ClassName
     const BUFFER_SIZE       = 4096;
 }
 ```
+
 
 ### 注释
 
@@ -190,34 +208,6 @@ $sPositionRight;//右方单行注释
 $sPositionAboveMulti; 
 ```
 
-#### 类注释
-```php
-/**
- * 类注释
- */
-class ClassName
-{
-
-}
-```
-
-#### 类成员变量和常量注释:
-```php
-class ClassName
-{
-    /**
-     * 常量的注释
-     * @var string
-     */
-    const CONSTANT_VALUE    = 'constant value';
-     
-    /**
-     * 成员变量的注释
-     * @var int
-     */
-    protected $m_nTestedMethods = null;
-}
-```
 
 #### 函数注释
 
@@ -234,6 +224,38 @@ public function AddUser($sUserName, $nAge, $sTel = '10086')
     return $ret;
 }
 
+```
+
+
+#### 类注释
+```php
+/**
+ * 类注释
+ */
+class ClassName
+{
+
+}
+```
+
+
+#### 类成员变量和常量注释
+
+```php
+class ClassName
+{
+    /**
+     * 常量的注释
+     * @var string
+     */
+    const CONSTANT_VALUE    = 'constant value';
+     
+    /**
+     * 成员变量的注释
+     * @var int
+     */
+    protected $m_nTestedMethods = null;
+}
 ```
 
 
@@ -283,6 +305,7 @@ if ($bNeedSendMail || $bNeedSendSms) {
 }
 ```
 
+
 #### switch
 
 * switch的条件分支应该整体缩进，每个条件分支最后空出一行（最后一个条件分支除外）
@@ -307,6 +330,7 @@ switch (condition) {
 }
 ```
 
+
 #### 三元运算符
 
 三元运算符用于变量赋值时
@@ -323,6 +347,7 @@ $c = ($bOk ? 'Succees' : 'Failed').' Upload files';
 
 ```
 
+
 #### foreach
 
 ```php
@@ -333,6 +358,8 @@ foreach ($products as $key => $product) {
     $product->getTitle();
 }
 ```
+
+
 ### 缩进和行宽
 
 #### 缩进
@@ -347,6 +374,7 @@ function indenting(){
 }
 
 ```
+
 
 #### 行宽
 为了增加可读性，行宽原则上为90-120个字符左右，超出应考虑换行
@@ -365,15 +393,21 @@ if ($condA < 10 || $condB < 10 || $condC < 10 || $condD || $condE < 10 || $condF
 $sLongString = 'You are strongly encouraged to always use curly braces even in situations where they are technically optional. Having them increases readability and decreases the likelihood of logic errors being introduced when new lines are added. ';
 ```
 
+
 ### 字符串
+
 #### 字符串定义
+
 常规字符串使用单引号包含, 只有在字符串中出现单引号的情况下才使用双引号
 ```php
 $sStr = 'I am a string.';
 
 $sStr = "Don't use double qoute if not necessary";
 ```
+
+
 #### 字符串拼接
+
 拼接字符串时不能在双引号包含的字符串中嵌入变量，使用单独的`.`号连接，禁止使用双引号中嵌入`$`变量来拼接字符串，`.`号之间不空格。
 ```php
 $sContent = 'Contents';
@@ -388,29 +422,9 @@ $sStr = 'Prefix '.$sContent.' Surfix';
                .'User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:54.0) Gecko/20100101 Firefox/54.0';
 ```
 
-### 函数
-#### 函数调用
-函数调用时函数名称和起始括号间不能有空格:
-```php
-$var = foo($bar, $baz, $quux);
-```
-连续同类型的函数调用可以插入空格字符保持对齐,来增强可读性:
-```php
-$short         = foo($bar);
-$long_variable = foo($baz);
-```
-当变量长度差异超过8字符后，上述规则不适用:
-```php
-$short = foo($bar);
-$thisVariableNameIsVeeeeeeeeeeryLong = foo($baz);
-```
 
-连续的同一个函数调用可以添加空格字符将参数对齐:
-```php
-$this->callSomeFunction('param1',     'second',        true);
-$this->callSomeFunction('parameter2', 'third',         false);
-$this->callSomeFunction('3',          'verrrrrrylong', true);
-```
+### 函数
+
 #### 函数/方法定义
 
 * 函数定义时不能超过80行，40行为佳，超出80行考虑按功能点进行拆分，将子功能点放置到子函数中实现。
@@ -447,8 +461,35 @@ $this->callSomeFunction('3',          'verrrrrrylong', true);
 ```
 
 
+#### 函数调用
+
+函数调用时函数名称和起始括号间不能有空格:
+```php
+$var = foo($bar, $baz, $quux);
+```
+连续同类型的函数调用可以插入空格字符保持对齐,来增强可读性:
+```php
+$short         = foo($bar);
+$long_variable = foo($baz);
+```
+当变量长度差异超过8字符后，上述规则不适用:
+```php
+$short = foo($bar);
+$thisVariableNameIsVeeeeeeeeeeryLong = foo($baz);
+```
+
+连续的同一个函数调用可以添加空格字符将参数对齐:
+```php
+$this->callSomeFunction('param1',     'second',        true);
+$this->callSomeFunction('parameter2', 'third',         false);
+$this->callSomeFunction('3',          'verrrrrrylong', true);
+```
+
+
 ### 数组
+
 #### 数组定义
+
 * 一般情况下数组定义使用`array()`而不使用`[]`，在明确废弃对php5.4以下版本的兼容的情况下，请使用`[]`。
 * 数组存在单个键值对，或者少量没有指定键名的子元素集合则可以在同一行书写。
 ```php
@@ -472,6 +513,8 @@ $arrHttpRequests = array(
     'qq'            => 'http://qq.com',
 )
 ```
+
+
 Author: <http://www.yantao.info/>
 
 Copy Right (c) 2017 WWW.YANTAO.INFO
