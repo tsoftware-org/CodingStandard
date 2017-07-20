@@ -424,7 +424,8 @@ $this->callSomeFunction('3',          'verrrrrrylong', true);
     
     }
 ```
-* 类成员常量、变量和方法定义的顺序为`const，public，protected，private`。
+* 类成员常量、变量定义的顺序为`const，private，protected，public`。
+* 类成员函数定义的顺序为`public，protected，private`。
 * 类构造函数置于公有函数定义集合的最前面，析构函数`__destruct()`置于公有函数定义集合的最后面。
 * 类私有函数的定义应置于类成员函数集合的末尾。
 ```php
@@ -433,7 +434,12 @@ $this->callSomeFunction('3',          'verrrrrrylong', true);
     
     }
 ```
-
+* 若有多个成员函数修饰关键字，其顺序应为:
+```php
+    final public function()
+    final public static function()
+    final protected static function()
+```
 * 虽然长但易于理解的函数名总比让人一头雾水的函数名强
 ```php
     function betterWriteLongMethodNamesThanNamesNobodyUnderstands()
@@ -458,6 +464,13 @@ $arrInstanceList = array(
         'name'   => 'Cindy',
     ),
 );
+
+//可以考虑对齐元素
+$arrHttpRequests = array(
+    'baidu'         => 'https://www.baidu.com',
+    'google_map'    => 'http://map.google.com',
+    'qq'            => 'http://qq.com',
+)
 ```
 Author: <http://www.yantao.info/>
 
