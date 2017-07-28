@@ -65,7 +65,7 @@ use TSoftware\Container\ObjectProphecy;
 
 基本限定前缀规则:
 * `s`表示字符串，如`sUserName`。
-* `n`表示数字，包括integer, float/double，如`nCount，nSize，nOffset，nWeight`。
+* `n`表示数字，包括integer，float/double，如`nCount，nSize，nOffset，nWeight`。
 * `h`表示句柄，包括文件句柄，mysql等资源句柄，如`hFile，hMysql`。
 * `arr`表示数组，如`arrUsersList`。
 * `className`表示类实例化的对象，如`userInfoObj，fooBarInstance`。
@@ -415,7 +415,7 @@ $sLongString = 'You are strongly encouraged to always use curly braces even in s
 
 #### 字符串定义
 
-常规字符串使用单引号包含, 只有在字符串中出现单引号的情况下才使用双引号
+常规字符串使用单引号包含，只有在字符串中出现单引号的情况下才使用双引号
 
 ```php
 $sStr = 'I am a string.';
@@ -499,13 +499,13 @@ $sStrArr = 'My name is '.$arrInfo['name'].', age is '.$arrInfo['age'];
 
 #### 函数调用
 
-函数调用时函数名称和起始括号间不能有空格:
+函数调用时函数名称和起始括号间不能有空格，参数之间以单个空格字符分隔:
 
 ```php
 $var = foo($bar, $baz, $quux);
 ```
 
-连续同类型的函数调用可以插入空格字符保持对齐,来增强可读性:
+连续同类型的函数调用可以插入空格字符保持对齐，来增强可读性:
 
 ```php
 $short         = foo($bar);
