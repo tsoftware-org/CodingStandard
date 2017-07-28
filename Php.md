@@ -3,7 +3,7 @@
 
 #### 文件字符编码
 
-统一使用`UTF-8`，无BOM头，禁止使用`GBK、GB2312、ASCII、ISO8859`等字符编码。
+统一使用`UTF-8`，无BOM头，禁止使用`GBK、GB2312、GB18030、ASCII、ISO8859`等字符编码。
 
 
 #### 文件名命名
@@ -44,16 +44,19 @@ Version主版本为重大更新时递增，次版本为较大修改时递增，�
 
 #### 命名空间
 
-`capsheaf/src/Fundation/Container/ClassName.php`
+`TSoftware/src/Fundation/Container/ClassName.php`
 
 ```php
+
 //上方空出一行
 namespace TSoftware\Call;
+
 //此处空出一行
 use TSoftware\Exception\MethodProphecyException;
 use TSoftware\Container\MethodProphecy;
 use TSoftware\Container\ObjectProphecy;
 //此处距离下方代码空出一行
+
 ```
 
 
