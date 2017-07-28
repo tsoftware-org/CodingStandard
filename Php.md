@@ -484,9 +484,9 @@ $sStrArr = 'My name is '.$arrInfo['name'].', age is '.$arrInfo['age'];
 * 若有多个成员函数修饰关键字，其顺序应为:
 
 ```php
-    final public function()
-    final public static function()
-    final protected static function()
+    final public function funcName()
+    final public static function funcName()
+    final protected static function funcName()
 ```
 
 * 虽然长但易于理解的函数名总比让人一头雾水的函数名强
