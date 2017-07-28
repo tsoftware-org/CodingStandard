@@ -146,7 +146,8 @@ class ClassName
 #### 类成员变量
 
 * 类成员变量，统一使用`$m_`前缀，置于常量定义之后，排序为`private，protected，public`，必要时进行对齐，成员变量初始化为null值时使用小写`null`，不能使用`NULL`。
-* 禁止使用`var`定义变量。
+* 禁止使用`var`定义变量，禁止定义以下划线`_`开头的变量名。
+
 ```php
 class ClassName
 {
@@ -165,10 +166,13 @@ class ClassName
 define的常量名使用下划线分割的大写字母表示，禁止使用小写字母，禁止定义大小写不敏感的常量。
 
 一般全局常量
+
 ```php
 define('ROOT_ABS_PATH', __DIR__);
 ```
+
 命名空间下的常量
+
 ```php
 namespace TSoftware
 define('SCOPED_ROOT_ABS_PATH', __DIR__);
@@ -178,6 +182,7 @@ define('SCOPED_ROOT_ABS_PATH', __DIR__);
 ##### 类常量
 
 类常量置于成员变量和成员函数声明之前，使用下划线分隔的大写字母表示:
+
 ```php
 class ClassName
 {
@@ -192,6 +197,7 @@ class ClassName
 #### 普通注释
 
 普通单行注释位于注释点上方或者右方
+
 ```php
 //上方单行注释
 $sPositionAbove;
@@ -200,6 +206,7 @@ $sPositionRight;//右方单行注释
 ```
 
 普通多行注释位于注释点上方
+
 ```php
 /* 
  * 多行注释
@@ -228,6 +235,7 @@ public function AddUser($sUserName, $nAge, $sTel = '10086')
 
 
 #### 类注释
+
 ```php
 /**
  * 类注释
@@ -262,9 +270,11 @@ class ClassName
 ### 语言结构
 
 #### if
+
 * `if`与整个判断条件之前的括号空一个空格，子判断条件与前后的逻辑操作符之间空一个空格，整个判断条件末尾的括号与中括号之间有一个空格。
 * 严禁因为简短不使用中括号包含各个条件的执行语句。
 * `elseif`连贯书写，禁止使用`else if`。
+
 ```php
 if ((condition1) || (condition2)) {
     action1;
@@ -276,6 +286,7 @@ if ((condition1) || (condition2)) {
 ```
 
 应将多个长的if条件拆分到多行
+
 ```php
 if ($condition1
     || $condition2
@@ -287,6 +298,7 @@ if ($condition1
 ```
 
 或者可以将第一个条件与其它条件对齐
+
 ```php
 if (   $condition1
     || $condition2
@@ -297,6 +309,7 @@ if (   $condition1
 ```
 
 应将复杂的if条件集合移动到if之前进行处理
+
 ```php
 $bNeedSendMail = ($condition1 || $condition2);
 $bNeedSendSms = ($condition3 && $condtion4);
@@ -311,6 +324,7 @@ if ($bNeedSendMail || $bNeedSendSms) {
 * switch的条件分支应该整体缩进，每个条件分支最后空出一行（最后一个条件分支除外）
 * 起始中括号与`switch`在同一行
 * 若`case`子句完成后，需要继续执行下一个子句，需要明确注释提醒
+
 ```php
 switch (condition) {
     case 1:
@@ -334,6 +348,7 @@ switch (condition) {
 #### 三元运算符
 
 三元运算符用于变量赋值时
+
 ```php
 $a = $condition1 && $condition2
     ? $foo : $bar;
@@ -363,7 +378,8 @@ foreach ($products as $key => $product) {
 ### 缩进和行宽
 
 #### 缩进
-使用四个空格，禁止使用`tab`或者其它宽度的缩进
+
+使用四个空格，禁止使用`tab`或者其它宽度的缩进，使用tab键缩进时将IDE的tab设置为用4个空格字符表示。
 
 ```php
 function indenting(){
@@ -389,6 +405,7 @@ if ($condA < 10 || $condB < 10 || $condC < 10 || $condD || $condE < 10 || $condF
 ```
 
 但最后出现的为字符串除外
+
 ```php
 $sLongString = 'You are strongly encouraged to always use curly braces even in situations where they are technically optional. Having them increases readability and decreases the likelihood of logic errors being introduced when new lines are added. ';
 ```
@@ -399,6 +416,7 @@ $sLongString = 'You are strongly encouraged to always use curly braces even in s
 #### 字符串定义
 
 常规字符串使用单引号包含, 只有在字符串中出现单引号的情况下才使用双引号
+
 ```php
 $sStr = 'I am a string.';
 
@@ -408,12 +426,22 @@ $sStr = "Don't use double qoute if not necessary";
 
 #### 字符串拼接
 
-拼接字符串时不能在双引号包含的字符串中嵌入变量，使用单独的`.`号连接，禁止使用双引号中嵌入`$`变量来拼接字符串，`.`号之间不空格。
+拼接字符串时不建议在双引号包含的字符串中直接嵌入变量，使用单独的`.`号连接，禁止使用双引号中嵌入`$`变量来拼接字符串，`.`号之间不空格。
+
 ```php
 $sContent = 'Contents';
+//建议使用连接符拼接字符串和变量
 $sStr = 'Prefix '.$sContent.' Surfix';
+
+//简单的字符串可以直接使用双引号嵌入变量
+$sStrSimple = "I am $sName";
+
+//带有数组的变量禁止嵌入，且风格应统一
+$sStrArr = 'My name is '.$arrInfo['name'].', age is '.$arrInfo['age'];
 ```
+
 多行长的字符串拼接应该换行，每行中出现的变量应保持形式上的正确性:
+
 ```php
     $sParams  = 'action=login&token=MY_TOKEN'
     $sPostMsg = 'GET /index.php?'.$sParams
@@ -428,33 +456,41 @@ $sStr = 'Prefix '.$sContent.' Surfix';
 #### 函数/方法定义
 
 * 函数定义时不能超过80行，40行为佳，超出80行考虑按功能点进行拆分，将子功能点放置到子函数中实现。
-* 函数名使用`lowerCamelCase`驼峰法。
+* 函数名使用`lowerCamelCase`驼峰法，私有函数禁止使用以`__`开头的命名方式。
+* 函数名称应使用动词+名词或仅动词的形式，不能使用形容词等不能准确表示行为的函数名。
 * 函数方法名称具有描述性，但同时应保持简洁。构造函数必须使用`__construct()`，禁止使用类名作为构造函数，且构造函数中不应该做不成功和抛出异常的事。 
 * 函数主体的起始中括号应换行重新占一行开始书写，两个连续的函数定义之间使用两个空行分隔。
 * 类成员函数必须带有访问修饰符`public，protected，private`，严禁使用默认值。
+
 ```php
     public function myMethod()
     {
     
     }
 ```
+
 * 类成员常量、变量定义的顺序为`const，private，protected，public`。
 * 类成员函数定义的顺序为`public，protected，private`。
 * 类构造函数置于公有函数定义集合的最前面，析构函数`__destruct()`置于公有函数定义集合的最后面。
 * 类私有函数的定义应置于类成员函数集合的末尾。
+
 ```php
     private function someNiceMethodName()
     {
     
     }
 ```
+
 * 若有多个成员函数修饰关键字，其顺序应为:
+
 ```php
     final public function()
     final public static function()
     final protected static function()
 ```
+
 * 虽然长但易于理解的函数名总比让人一头雾水的函数名强
+
 ```php
     function betterWriteLongMethodNamesThanNamesNobodyUnderstands()
     function singYmcaLoudly()
@@ -464,21 +500,27 @@ $sStr = 'Prefix '.$sContent.' Surfix';
 #### 函数调用
 
 函数调用时函数名称和起始括号间不能有空格:
+
 ```php
 $var = foo($bar, $baz, $quux);
 ```
+
 连续同类型的函数调用可以插入空格字符保持对齐,来增强可读性:
+
 ```php
 $short         = foo($bar);
 $long_variable = foo($baz);
 ```
+
 当变量长度差异超过8字符后，上述规则不适用:
+
 ```php
 $short = foo($bar);
 $thisVariableNameIsVeeeeeeeeeeryLong = foo($baz);
 ```
 
 连续的同一个函数调用可以添加空格字符将参数对齐:
+
 ```php
 $this->callSomeFunction('param1',     'second',        true);
 $this->callSomeFunction('parameter2', 'third',         false);
@@ -492,11 +534,14 @@ $this->callSomeFunction('3',          'verrrrrrylong', true);
 
 * 一般情况下数组定义使用`array()`而不使用`[]`，在明确废弃对php5.4以下版本的兼容的情况下，请使用`[]`。
 * 数组存在单个键值对，或者少量没有指定键名的子元素集合则可以在同一行书写。
+
 ```php
 $arrOneKV = array('id' => 10086);
 $arrFewVs = array('Gina', 'Tom', 'Cindy', 'Peter');
 ```
+
 * 数组存在多个键值对形式的子元素，或者子元素较长时分行书写。
+
 ```php
 $arrInstanceList = array(
     'foo'  => 'bar',
