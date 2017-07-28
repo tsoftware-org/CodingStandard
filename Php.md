@@ -24,9 +24,15 @@
 * 任何纯PHP代码文件结束时不应使用 `?>`结束标记，其它一般情况使用该标记应换行书写，文件尾的结束标记`?>`之后必须换行。
 
 ```php
+
+<html>
+    <body>
+        <p>Not a simple php file.</p>
+    </body>
 <?php
 //换行
-
+    echo $sFooterHtml;
+    echo '</html>';
 //文件结束时使用结束标记后必须换行(LF/CRLF)
 ?>
 
