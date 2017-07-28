@@ -4,7 +4,7 @@
 #### 文件字符编码
 
 * 统一使用`UTF-8`，无BOM头，禁止使用`GBK、GB2312、GB18030、ASCII、ISO8859`等字符编码。
-
+* 建议使用`LF`而不是`CRLF`作为换行符。
 
 
 #### 文件名命名
@@ -516,7 +516,7 @@ $sStrArr = 'My name is '.$arrInfo['name'].', age is '.$arrInfo['age'];
 ```php
     final public function funcName()
     final public static function funcName()
-    final protected static function funcName()
+    abstract protected static function funcName()
 ```
 
 * 虽然长但易于理解的函数名总比让人一头雾水的函数名强
