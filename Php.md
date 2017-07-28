@@ -65,7 +65,9 @@ Version主版本为重大更新时递增，次版本为较大修改时递增，�
 
 #### 命名空间
 
-`TSoftware/src/Fundation/Container/ClassName.php`
+* 文件名应该如：`TSoftware/src/Fundation/Container/ClassName.php`的形式。
+
+* `use`只能用在命名空间`namespace`声明之后，中间空出一行书写。
 
 ```php
 
