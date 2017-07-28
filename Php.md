@@ -187,15 +187,17 @@ class ClassName
 
 ##### 全局常量
 
-define的常量名使用下划线分割的大写字母表示，禁止使用小写字母，禁止定义大小写不敏感的常量。
+* define的常量名使用下划线分割的大写字母表示，禁止使用小写字母，禁止定义大小写不敏感的常量。
 
-一般全局常量
+* PHP常量`true, false, null`必须使用小写，禁止使用`True, TRUE, False, FALSE, NULL`等形式。
+
+* 一般全局常量定义使用全大写字符，单词之间使用下划线，使用缩写要表意清楚。
 
 ```php
 define('ROOT_ABS_PATH', __DIR__);
 ```
 
-命名空间下的常量
+* 命名空间下的常量
 
 ```php
 namespace TSoftware
