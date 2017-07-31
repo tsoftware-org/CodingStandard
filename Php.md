@@ -4,12 +4,12 @@
 #### 文件字符编码
 
 * 统一使用`UTF-8`，无BOM头，禁止使用`GBK、GB2312、GB18030、ASCII、ISO8859`等字符编码。
-* 建议使用`LF`而不是`CRLF`作为换行符。
+* 建议优先使用`LF`而不是`CRLF`作为换行符。
 
 
 #### 文件名命名
 
-* 全部文件名使用`UpperCamelCase.php`命名。
+* 全部文件名使用驼峰法`UpperCamelCase.php`命名。
 * 文件名与文件中的类需要对应，如`ClassName`类，文件名则为`ClassName.php`。
 * 每个对应文件名的文件仅能在其中定义一个类或者一个接口，严禁在同一个文件中定义多个。
 * 单元测试代码必须与被测的类名相对应，如`ClassNameTest.php`。
@@ -87,7 +87,7 @@ use TSoftware\Container\ObjectProphecy;
 
 #### 变量
 
-使用基本类型限定+驼峰法`UpperCamelCase`定义，不能使用下划线分割的变量，存在转换的`mixed`类型变量直接使用驼峰法`lowerCamelCase`:
+建议使用基本类型限定+驼峰法的`typeUpperCamelCase`定义，不使用下划线分割的变量，存在转换的`mixed`类型变量直接使用驼峰法`lowerCamelCase`:
 
 基本限定前缀规则:
 * `s`表示字符串，如`sUserName`。
