@@ -590,6 +590,6 @@ $arrHttpRequests = array(
 ```
 
 
-Author: <http://www.yantao.info/>
+Author: tsoftware <admin@yantao.info>
 
-Copy Right (c) 2017 WWW.YANTAO.INFO
+Copy Right (c) 2017 TSoftware.Org
