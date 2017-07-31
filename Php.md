@@ -592,4 +592,4 @@ $arrHttpRequests = array(
 
 Author: tsoftware <admin@yantao.info>
 
-Copy Right (c) 2017 TSoftware.Org
+Copyright © 2017 TSoftware.Org
