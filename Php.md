@@ -87,7 +87,7 @@ use TSoftware\Container\ObjectProphecy;
 
 #### 变量
 
-建议使用基本类型限定+驼峰法的`typeUpperCamelCase`定义，不使用下划线分割的变量，存在转换的`mixed`类型变量直接使用驼峰法`lowerCamelCase`:
+以下为非标准做法，但是建议使用类C++的形式：基本类型限定+驼峰法的`typeUpperCamelCase`定义，不使用下划线分割的变量，存在转换的`mixed`类型变量直接使用驼峰法`lowerCamelCase`:
 
 基本限定前缀规则:
 * `s`表示字符串，如`sUserName`。
@@ -138,6 +138,8 @@ g_nCount = 1024;
 
 * 类名使用大写字符开头的驼峰法`UpperCamelCase`表示，中括号放在类名定义的下一行。
 * 类名必须为名词，不能为形容词，动词等。
+* 接口类必须加后缀`Interface`，如`TSoftware\Foo\BarInterface`。
+* Trait接必须加后缀`Trait`，如`TSoftware\Foo\BarTrait`。
 * 不能直接实例化的抽象类必须以`Abstract`开头。
 * 类命名必须符合实际含义，去掉命名空间后，还能准确表达类名的字面含义。
 
