@@ -567,31 +567,31 @@ $this->callSomeFunction('3',          'verrrrrrylong', true);
 
 #### 数组定义
 
-* 一般情况下数组定义使用`array()`而不使用`[]`，在明确废弃对php5.4以下版本的兼容的情况下，请使用`[]`。
+* 一般情况下数组定义使用`[]`而不使用`array()`，注意PHP版本兼容性。
 * 数组存在单个键值对，或者少量没有指定键名的子元素集合则可以在同一行书写。
 
 ```php
-$arrOneKV = array('id' => 10086);
-$arrFewVs = array('Gina', 'Tom', 'Cindy', 'Peter');
+$arrOneKV = ['id' => 10086];
+$arrFewVs = ['Gina', 'Tom', 'Cindy', 'Peter'];
 ```
 
 * 数组存在多个键值对形式的子元素，或者子元素较长时分行书写。
 
 ```php
-$arrInstanceList = array(
+$arrInstanceList = [
     'foo'  => 'bar',
-    'spam' => array(
+    'spam' => array[
         'author' => 'tsoftware',
         'name'   => 'Cindy',
-    ),
-);
+    ],
+];
 
 //可以考虑对齐元素
-$arrHttpRequests = array(
+$arrHttpRequests = [
     'baidu'         => 'https://www.baidu.com',
     'google_map'    => 'http://map.google.com',
     'qq'            => 'http://qq.com',
-)
+];
 ```
 
 
