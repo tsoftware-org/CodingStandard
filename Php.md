@@ -258,7 +258,7 @@ $sPositionAboveMulti;
  * @param string $sTel 电话
  * @return string|integer|float|boolean|class|resource 阐明返回的类型，若为API方法，需要在下方标记上返回的样本数据
  */
-public function AddUser($sUserName, $nAge, $sTel = '10086')
+public function addUser($sUserName, $nAge, $sTel = '10086')
 {
     return $ret;
 }
@@ -294,7 +294,7 @@ class ClassName
      * 成员变量的注释
      * @var int
      */
-    protected $m_nTestedMethods = null;
+    protected $m_nTestedMethods = 0;
 }
 ```
 
@@ -313,7 +313,7 @@ if ((condition1) || (condition2)) {
 } elseif ((condition3) && (condition4)) {
     action2;
 } else {
-    defaultaction;
+    defaultAction;
 }
 ```
 
@@ -371,7 +371,7 @@ switch (condition) {
         action2;
         break;
     default:
-        defaultaction;
+        defaultAction;
         break;
 }
 ```
@@ -401,7 +401,7 @@ $c = ($bOk ? 'Succees' : 'Failed').' Upload files';
 /** 
  * @var $product \TSoftware\SomePackage\Domain\Model\Product 
  */
-foreach ($products as $key => $product) {
+foreach ($products as $nKey => $product) {
     $product->getTitle();
 }
 ```
@@ -464,6 +464,9 @@ $sStr = "Don't use double qoute if not necessary";
 $sContent = 'Contents';
 //建议使用连接符拼接字符串和变量
 $sStr = 'Prefix '.$sContent.' Surfix';
+
+//嵌入的变量太多，可以直接在双引号中使用变量
+$sMessage = "Range must in {$nMin} to {$nMax}, {$nCurrent} given.";
 
 //简单的字符串可以直接使用双引号嵌入变量
 $sStrSimple = "I am $sName";
