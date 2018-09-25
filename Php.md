@@ -256,7 +256,7 @@ $sPositionAboveMulti;
  * @param string $sUserName 用户名
  * @param int $nAge 用户年龄
  * @param string $sTel 电话
- * @return string|integer|float|boolean|class|resource 阐明返回的类型，若为API方法，需要在下方标记上返回的样本数据
+ * @return string|int|float|bool|class|resource 阐明返回的类型，若为API方法，需要在下方标记上返回的样本数据
  */
 public function addUser($sUserName, $nAge, $sTel = '10086')
 {
@@ -370,6 +370,7 @@ switch (condition) {
     case 3:
         action2;
         break;
+        
     default:
         defaultAction;
         break;
